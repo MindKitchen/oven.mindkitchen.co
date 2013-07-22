@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 /*h2 { font-size: 30px; line-height: 40px; }*/
 
 hr {
-  background: linear-gradient( left, rgba(0,0,0,0.15), rgba(255,242,0,1.00), rgba(236,0,236,1.00), rgba(0,174,239,1.00), rgba(0,0,0,0.15) ); 
+  background: linear-gradient( left, rgba(0,0,0,0.15), rgba(255,242,0,1.00), rgba(236,0,236,1.00), rgba(0,174,239,1.00), rgba(0,0,0,0.15) );
   border: 0px;
   height: 1px;
   margin: 1.67em 0;
@@ -74,6 +74,7 @@ a:hover {
 
     h1 {
       @include span-columns(3 omega, 5);
+      text-align: right;
     }
   }
 
@@ -85,7 +86,9 @@ a:hover {
   width: 100%;
 }
 
-.project { }
+p {
+  line-height: 1.67em;
+}
 
 #footer {
   font-size: 0.67em;
