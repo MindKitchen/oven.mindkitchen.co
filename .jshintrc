@@ -11,13 +11,12 @@
     "latedef": true,
     "newcap": true,
     "noarg": true,
-    "quotmark": "single",
+    "quotmark": "double",
     "regexp": true,
     "undef": true,
     "unused": true,
     "strict": true,
     "trailing": true,
     "smarttabs": true,
-    "jquery": true,
-    "browser": true
+    "jquery": true
 }
