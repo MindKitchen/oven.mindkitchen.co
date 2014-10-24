@@ -1,20 +1,17 @@
 language: node_js
 node_js:
 - '0.10'
-before_script:
-- npm install -g bower
-- bower install
 script: gulp build
 deploy:
   provider: divshot
   api_key:
-    secure: rbL0DnzLO9a17sXanMi7Y+5QHMCOygk4qDZxNKY1qgtlaBKIPH/gh8pp2hJMu8sO9kwKZUqFkB/KNqSyBWK1/kHisltNNMSlkWxUrAb2mVEme0RKvcHQCQHTYflJYfOoSNfIxuv7jC+HdAsUO00ZbYoekt5RmAlwu7mp8hNa0L8=
+    secure: RIXC3U7+E8ieDbZ9ZIIoR7UioahCVq/1wJfwZDSlyEIBxNeZcfAZ+cx4OVXpIy7jq1SF8h09HLkScsPIXqP8JBE340UPeAxTtifDwNxj3PlQ0XaQR+szaf4hlGJX2pjEW1+Oui3Ds0gq+g6raKpcflUhdiKpQzuavoArJL/ZLQ0=
   skip_cleanup: true
   on:
     repo: MindKitchen/oven.mindkitchen.co
 notifications:
   webhooks:
     urls:
-      secure: PsHBm4LvecWEQmE0o3oVfwpoh8FNgJESZLik7xg+jTpupsLh9J+LG/oXsgfuwAmTRL3tDVxafZsfpB19iHFiYWcamW3b87nqH3t//Wm8lTSJc0UJurmIYYIwvsXPzT4GRcZl4fTOmp1O20LAajbkIO22UfwmfHdvPJ4ZRbgT2V0=
+      secure: NMP7zW5Kq8RVFz4pTNP8y5sNnYAcYapEpEroCqFT1MyIDxWv3yWfBX6/frU/4oZxYfkRIF3qKpJ0fttUFb+HmfP7J+LqVpvz+4AyD5OyuLhC6zSipp9WeXnnT+frrGvllNAzG3FM1rTduwMMABGBsvSgZsMO/90fFkFnMEpc7rA=
   slack:
     secure: DS7km6/5Kn3CKNpj7KTYMgJEk+N4Cubtdu2N7XZpRJvJV4BF1SMMQs10wCB6fjHcfggwdj94sDPCrwbzwJSFsI+E7CeI3EjjJt6RQDDGylP9rFhAmEHKNkvmPbi2obWqpCVKgn/nWUXkzS0cx/gQuNizkxGPS/8v6zFDb2i2gYc=
