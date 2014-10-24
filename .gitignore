@@ -1,4 +1,4 @@
 node_modules
-.tmp
-.sass-cache
-app/bower_components
+build
+.divshot-cache
+Session.vim

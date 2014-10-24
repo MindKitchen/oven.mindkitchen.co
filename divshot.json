@@ -1,0 +1,6 @@
+{
+  "name": "oven-mindkitchen-co",
+  "root": "build",
+  "clean_urls": true,
+  "error_page": "error.html"
+}
