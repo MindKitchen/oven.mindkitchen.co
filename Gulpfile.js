@@ -23,7 +23,13 @@ var paths = {
   css: ["src/css/**/*.scss"],
   js: ["src/js/**/*.js*", "node_modules/qubeulator-components/**/*.js*"],
   test: ["test/**/*.js*", "src/js/**/*.js*", "node_modules/qubeulator-components/**/*.js*"],
-  copy: ["src/*.html", "src/img/**/*", "src/css-animation-demo/**/*"],
+  copy: [
+    "src/*.html",
+    "src/robots.txt",
+    "src/favicon.ico",
+    "src/img/**/*",
+    "src/css-animation-demo/**/*",
+  ],
   entrypoint: ["./src/js/app.js"],
   build: "./build"
 };
@@ -85,7 +91,7 @@ gulp.task("css", ["clean-css"], function() {
   return gulp.src(paths.css)
     .pipe(sourcemaps.init())
     .pipe(sass({
-      includePaths: 
+      includePaths:
         require("node-neat").includePaths.concat([
           "./node_modules/normalize.scss",
         ])
