@@ -9,6 +9,10 @@ var mkdirp = require("mkdirp");
 var source = require("vinyl-source-stream");
 var buffer = require("vinyl-buffer");
 var sass = require("gulp-sass");
+var cssBase64 = require("gulp-css-base64");
+var minifyCSS = require("gulp-minify-css");
+var minifyHTML = require("gulp-minify-html");
+var inlinesource = require("gulp-inline-source");
 var sourcemaps = require("gulp-sourcemaps");
 var uglify = require("gulp-uglify");
 var jshint = require("gulp-jshint");
@@ -24,7 +28,7 @@ var paths = {
   js: ["src/js/**/*.js*", "node_modules/qubeulator-components/**/*.js*"],
   test: ["test/**/*.js*", "src/js/**/*.js*", "node_modules/qubeulator-components/**/*.js*"],
   copy: [
-    "src/*.html",
+    "src/error.html",
     "src/robots.txt",
     "src/favicon.ico",
     "src/img/**/*",
@@ -42,7 +46,7 @@ var handleError = function(err) {
   this.emit("end");
 };
 
-gulp.task("serve", ["watch", "css", "js-debug", "copy"], function() {
+gulp.task("serve", ["watch", "css-debug", "js-debug", "copy-debug"], function() {
   browserSync({
     files: [],
     port: 8080,
@@ -82,12 +86,12 @@ gulp.task("lint", function() {
     .pipe(jshint.reporter("fail"));
 });
 
-gulp.task("clean-css", function(done) {
+gulp.task("css-clean", function(done) {
   del([paths.build + "/css/*"], done);
   mkdirp(paths.build + "/css");
 });
 
-gulp.task("css", ["clean-css"], function() {
+gulp.task("css-debug", ["css-clean"], function() {
   return gulp.src(paths.css)
     .pipe(sourcemaps.init())
     .pipe(sass({
@@ -102,12 +106,27 @@ gulp.task("css", ["clean-css"], function() {
     .pipe(reload({stream:true}));
 });
 
-gulp.task("clean-js", function(done) {
+gulp.task("css-build", ["css-clean"], function(done) {
+  var stream = gulp.src(paths.css)
+    .pipe(sass({
+      includePaths:
+        require("node-neat").includePaths.concat([
+          "./node_modules/normalize.scss",
+        ])
+    }))
+    .pipe(cssBase64())
+    .pipe(minifyCSS())
+    .pipe(gulp.dest(paths.build + "/css"));
+
+  stream.on("end", done);
+});
+
+gulp.task("js-clean", function(done) {
   del([paths.build + "/js/*"], done);
   mkdirp(paths.build + "/js");
 });
 
-gulp.task("js-debug", ["clean-js"], function() {
+gulp.task("js-debug", ["js-clean"], function() {
   // Until JS is needed
   return;
 
@@ -126,7 +145,7 @@ gulp.task("js-debug", ["clean-js"], function() {
     .pipe(reload({stream:true}));
 });
 
-gulp.task("js-build", ["clean-js"], function() {
+gulp.task("js-build", ["js-clean"], function() {
   // Until JS is needed
   return;
 
@@ -141,28 +160,49 @@ gulp.task("js-build", ["clean-js"], function() {
     .pipe(gulp.dest(paths.build));
 });
 
-gulp.task("clean-copy", function(done) {
+gulp.task("copy-clean", function(done) {
   // TODO: Fix me!
   //del([paths.build + "/" + paths.index], done);
   done();
 });
 
-gulp.task("copy", ["clean-copy"], function () {
+gulp.task("copy-debug", ["copy-clean"], function () {
   gulp.src(paths.copy, { base: "./src" })
+    .pipe(gulp.dest(paths.build))
+    .pipe(reload({stream:true}));
+
+  gulp.src("./src/index.html")
     .pipe(gulp.dest(paths.build))
     .pipe(reload({stream:true}));
 });
 
+gulp.task("copy-build", ["copy-clean", "css-build"], function () {
+  gulp.src(paths.copy, { base: "./src" })
+    .pipe(gulp.dest(paths.build));
+
+  // Inline CSS in index.html
+  gulp.src("./src/index.html")
+    .pipe(inlinesource({
+      rootpath: paths.build,
+      compress: false,
+      swallowErrors: false
+    }))
+    .pipe(minifyHTML({
+      comments: true,
+    }))
+    .pipe(gulp.dest(paths.build));
+});
+
 gulp.task("watch", function() {
-  gulp.watch(paths.css, ["css"]);
+  gulp.watch(paths.css, ["css-debug"]);
   gulp.watch(paths.js, ["js-debug"]);
-  gulp.watch(paths.copy, ["copy"]);
+  gulp.watch(paths.copy, ["copy-debug"]);
 });
 
 gulp.task("watch-test", ["test"], function() {
   gulp.watch(paths.test, ["test"]);
 });
 
-gulp.task("build", ["jscs", "lint", "test", "css", "js-build", "copy"]);
+gulp.task("build", ["jscs", "lint", "test", "css-build", "js-build", "copy-build"]);
 gulp.task("ci", ["jscs", "lint", "test"]);
-gulp.task("default", ["watch", "css", "js-debug", "copy"]);
+gulp.task("default", ["watch", "css-debug", "js-debug", "copy-debug"]);
