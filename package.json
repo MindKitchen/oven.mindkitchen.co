@@ -5,7 +5,11 @@
   "author": "Mind Kitchen",
   "repository": "https://github.com/MindKitchen/oven.mindkitchen.co",
   "dependencies": {
-    "normalize.scss": "https://github.com/randallagordon/normalize.scss/tarball/npm-installable"
+    "domready": "^1.0.7",
+    "lodash.random": "^2.4.1",
+    "normalize.scss": "https://github.com/randallagordon/normalize.scss/tarball/npm-installable",
+    "raf": "^2.0.4",
+    "tinygradient": "^0.2.0"
   },
   "devDependencies": {
     "browser-sync": "^1.5.2",
