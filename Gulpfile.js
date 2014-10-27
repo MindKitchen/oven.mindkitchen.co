@@ -127,9 +127,6 @@ gulp.task("js-clean", function(done) {
 });
 
 gulp.task("js-debug", ["js-clean"], function() {
-  // Until JS is needed
-  return;
-
   browserify({
     entries: paths.entrypoint,
     debug: true
@@ -146,9 +143,6 @@ gulp.task("js-debug", ["js-clean"], function() {
 });
 
 gulp.task("js-build", ["js-clean"], function() {
-  // Until JS is needed
-  return;
-
   browserify({
     entries: paths.entrypoint,
   })
@@ -176,7 +170,7 @@ gulp.task("copy-debug", ["copy-clean"], function () {
     .pipe(reload({stream:true}));
 });
 
-gulp.task("copy-build", ["copy-clean", "css-build"], function () {
+gulp.task("copy-build", ["copy-clean", "css-build", "js-build"], function () {
   gulp.src(paths.copy, { base: "./src" })
     .pipe(gulp.dest(paths.build));
 
