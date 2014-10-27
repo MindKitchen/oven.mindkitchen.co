@@ -197,6 +197,7 @@ gulp.task("watch", function() {
   gulp.watch(paths.css, ["css-debug"]);
   gulp.watch(paths.js, ["js-debug"]);
   gulp.watch(paths.copy, ["copy-debug"]);
+  gulp.watch("./src/index.html", ["copy-debug"]);
 });
 
 gulp.task("watch-test", ["test"], function() {

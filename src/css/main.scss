@@ -9,12 +9,35 @@ $l: new-breakpoint(min-width 512px 12);
 $xl: new-breakpoint(min-width 768px 12);
 $xxl: new-breakpoint(min-width 1366px 12);
 
+$tint-percent: 30%;
+
+@mixin mk-container() {
+  @include outer-container;
+
+  @include media($l) {
+    max-width: em(350);
+  }
+}
+
+@mixin mk-gradient() {
+  @include background-image(
+    linear-gradient(
+      left,
+      rgba(0,0,0,0.15),
+      rgba(255,242,0,1.00),
+      rgba(236,0,236,1.00),
+      rgba(0,174,239,1.00),
+      rgba(0,0,0,0.15)
+    )
+  );
+}
+
 html { height: 100%; }
 
 body {
   background: #eaeaea;
   color: #282828;
-  text-shadow: rgb(255, 255, 255) 1px 1px 0px;
+  text-shadow: rgba(0, 0, 0, 0.20) 1px 1px 1px;
   font-size: 100%;
   margin-top: 2em;
 
@@ -49,17 +72,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 hr {
-  @include background-image(
-    linear-gradient(
-      left,
-      rgba(0,0,0,0.15),
-      rgba(255,242,0,1.00),
-      rgba(236,0,236,1.00),
-      rgba(0,174,239,1.00),
-      rgba(0,0,0,0.15)
-    )
-  );
-
+  @include mk-gradient;
   border: 0px;
   height: 1px;
   margin: 1.67em 0;
@@ -73,22 +86,32 @@ p {
   line-height: 1.67em;
 }
 
-#footer {
-  font-size: 0.67em;
-  text-align: right;
-  padding-top: 0.67em;
+footer {
+  background: #282828;
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.65) 1px 1px 0px;
 
-  & a {
+  div {
+    @include mk-container;
+  }
+
+  p {
+    font-size: 0.67em;
+    text-align: right;
+    padding-top: 1em;
+    margin-top: 0;
+  }
+
+  a {
     border-bottom: none;
+    color: white;
   }
 }
 
-#container {
-  @include outer-container;
+header {
+  @include mk-container;
 
   @include media($l) {
-    max-width: em(350);
-
     #logo {
       @include span-columns(4);
     }
@@ -97,12 +120,59 @@ p {
       @include span-columns(8);
       @include omega;
       text-align: right;
+      padding-bottom: 0.33em;
     }
   }
 }
 
-h1 {
-  @include media($l) {
-    padding-bottom: 0.67em;
+#description {
+  @include mk-container;
+
+  margin-bottom: 2em;
+}
+
+.project {
+  &:nth-of-type(1) {
+    border-top: 1px solid #ccc;
+  }
+
+  &> div {
+    @include mk-container;
+  }
+
+  h2 {
+    margin-top: 0;
+    padding-top: 1.67em;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+    padding-bottom: 1.67em;
+  }
+
+  &:nth-of-type(3n + 1) {
+    background-color: tint(cyan, $tint-percent);
+  }
+  &:nth-of-type(3n + 2) {
+    background-color: tint(magenta, $tint-percent);
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.50) 1px 1px 1px;
+    a {
+      color: white;
+      border-bottom: 1px dotted yellow;
+      &:hover {
+        color: yellow;
+      }
+    }
+    h2 a {
+      color: white;
+      border-bottom: none;
+      &:hover {
+        color: yellow;
+      }
+    }
+  }
+  &:nth-of-type(3n + 3) {
+    background-color: tint(yellow, $tint-percent);
   }
 }
