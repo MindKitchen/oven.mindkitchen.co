@@ -9,7 +9,10 @@ $l: new-breakpoint(min-width 512px 12);
 $xl: new-breakpoint(min-width 768px 12);
 $xxl: new-breakpoint(min-width 1366px 12);
 
-$tint-percent: 30%;
+/* Official MK colors */
+$color-c: #00adef;
+$color-m: #ec008b;
+$color-y: #fff100;
 
 @mixin mk-container() {
   @include outer-container;
@@ -150,29 +153,62 @@ header {
     padding-bottom: 1.67em;
   }
 
+
   &:nth-of-type(3n + 1) {
-    background-color: tint(cyan, $tint-percent);
-  }
-  &:nth-of-type(3n + 2) {
-    background-color: tint(magenta, $tint-percent);
+    background-color: $color-c;
     color: white;
     text-shadow: rgba(0, 0, 0, 0.50) 1px 1px 1px;
     a {
       color: white;
-      border-bottom: 1px dotted yellow;
+      border-bottom: 1px dotted $color-y;
       &:hover {
-        color: yellow;
+        color: $color-y;
       }
     }
     h2 a {
       color: white;
       border-bottom: none;
       &:hover {
-        color: yellow;
+        color: $color-y;
+      }
+    }
+  }
+  &:nth-of-type(3n + 2) {
+    background-color: $color-m;
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.50) 1px 1px 1px;
+    a {
+      color: white;
+      border-bottom: 1px dotted $color-y;
+      &:hover {
+        color: $color-y;
+      }
+    }
+    h2 a {
+      color: white;
+      border-bottom: none;
+      &:hover {
+        color: $color-y;
       }
     }
   }
   &:nth-of-type(3n + 3) {
-    background-color: tint(yellow, $tint-percent);
+    background-color: $color-y;
+    color: white;
+    text-shadow: rgba(30, 30, 30, 0.50) 1px 1px 1px;
+    a {
+      color: white;
+      &:hover {
+        color: $color-m;
+        text-shadow: rgba(0, 0, 0, 0.20) 1px 1px 1px;
+      }
+    }
+    h2 a {
+      color: white;
+      &:hover {
+        color: $color-m;
+        text-shadow: rgba(30, 30, 30, 0.20) 1px 1px 1px;
+      }
+    }
   }
 }
