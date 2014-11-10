@@ -171,10 +171,6 @@ footer {
 }
 
 .project {
-  &:nth-of-type(1) {
-    border-top: 1px solid #ccc;
-  }
-
   &> div {
     @include mk-container;
   }
@@ -190,9 +186,13 @@ footer {
     padding-bottom: 1.67em;
   }
 
+  &:nth-of-type(2) {
+    border-top: 0.5em solid shade(#eaeaea, 15%);
+  }
 
   &:nth-of-type(3n + 2) {
     background-color: $color-c;
+    border-bottom: 0.5em solid shade($color-c, 15%);
     color: white;
     text-shadow: rgba(0, 0, 0, 0.50) 1px 1px 1px;
     a {
@@ -212,6 +212,7 @@ footer {
   }
   &:nth-of-type(3n + 3) {
     background-color: $color-m;
+    border-bottom: 0.5em solid shade($color-m, 15%);
     color: white;
     text-shadow: rgba(0, 0, 0, 0.50) 1px 1px 1px;
     a {
@@ -231,6 +232,7 @@ footer {
   }
   &:nth-of-type(3n + 1) {
     background-color: $color-y;
+    border-bottom: 0.5em solid shade($color-y, 15%);
     color: white;
     text-shadow: rgba(30, 30, 30, 0.40) 1px 1px 0px;
     a {
