@@ -231,8 +231,8 @@ footer {
     }
   }
   &:nth-of-type(3n + 1) {
-    background-color: $color-y;
-    border-bottom: 0.5em solid shade($color-y, 15%);
+    background-color: shade($color-y, 5%);
+    border-bottom: 0.5em solid shade($color-y, 20%);
     color: white;
     text-shadow: rgba(30, 30, 30, 0.50) 1px 1px 0px;
     a {
