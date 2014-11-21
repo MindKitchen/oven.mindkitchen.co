@@ -14,6 +14,10 @@ $color-c: #00adef;
 $color-m: #ec008b;
 $color-y: #fff100;
 
+$color-c: lighten(desaturate($color-c, 20%), 10%);
+$color-m: lighten(desaturate($color-m, 20%), 10%);
+$color-y: lighten(desaturate($color-y, 15%), 10%);
+
 @mixin mk-container() {
   @include outer-container;
 
@@ -40,7 +44,7 @@ html { height: 100%; }
 body {
   background: #eaeaea;
   color: #282828;
-  text-shadow: rgba(64, 64, 64, 0.80) 1px 1px 1px;
+  text-shadow: rgba(64, 64, 64, 0.90) 1px 1px 2px;
   font-size: 100%;
   margin-top: 2em;
 
@@ -132,7 +136,7 @@ header {
 }
 
 footer {
-  background: #282828;
+  background: #333;
   color: white;
   text-shadow: rgba(0, 0, 0, 0.65) 1px 1px 0px;
 
@@ -232,22 +236,19 @@ footer {
     }
   }
   &:nth-of-type(3n + 1) {
-    background-color: shade($color-y, 5%);
+    background-color: $color-y;
     border-bottom: 0.5em solid shade($color-y, 20%);
-    color: white;
-    text-shadow: rgba(30, 30, 30, 0.50) 1px 1px 0px;
+    text-shadow: rgba(0, 0, 0, 0.30) 1px 1px 1px;
     a {
-      color: white;
       &:hover {
         color: $color-m;
         text-shadow: rgba(0, 0, 0, 0.20) 1px 1px 1px;
       }
     }
     h2 a {
-      color: white;
       &:hover {
         color: $color-m;
-        text-shadow: rgba(30, 30, 30, 0.20) 1px 1px 1px;
+        text-shadow: rgba(0, 0, 0, 0.20) 1px 1px 1px;
       }
     }
   }
