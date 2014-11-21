@@ -38,8 +38,8 @@ var renderFrame = function () {
   var newY = shifted[1] + random(-(h / 2), h / 2);
   newX = (newX > 0) ? newX : 0;
   newY = (newY > 0) ? newY : 0;
-  newX = (newX < w) ? newX : w - 1;
-  newY = (newY < h) ? newY : h - 1;
+  newX = (newX < w) ? newX : w;
+  newY = (newY < h) ? newY : h;
   poly.push([newX, newY]);
 };
 
