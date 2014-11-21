@@ -22,6 +22,7 @@ var plumber = require("gulp-plumber");
 var notify = require("gulp-notify");
 var browserSync = require("browser-sync");
 var reload = browserSync.reload;
+var through = require("through");
 
 var paths = {
   css: ["src/css/**/*.scss"],
@@ -142,7 +143,7 @@ gulp.task("js-debug", ["js-clean"], function() {
     .pipe(reload({stream:true}));
 });
 
-gulp.task("js-build", ["js-clean"], function() {
+gulp.task("js-build", ["js-clean"], function(done) {
   browserify({
     entries: paths.entrypoint,
   })
@@ -151,7 +152,10 @@ gulp.task("js-build", ["js-clean"], function() {
     .pipe(source("js/bundle.js"))
     .pipe(buffer())
     .pipe(uglify())
-    .pipe(gulp.dest(paths.build));
+    .pipe(gulp.dest(paths.build))
+    .pipe(through(function () {
+      done();
+    }));
 });
 
 gulp.task("copy-clean", function(done) {
