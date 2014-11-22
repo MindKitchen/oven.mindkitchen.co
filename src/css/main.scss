@@ -3,6 +3,15 @@
 @import "bourbon";
 @import "neat";
 
+@import "icomoon-inline";
+// Simulates .fa-fw
+[class^="icon-"], [class*=" icon-"] {
+  width: 1.28571429em;
+  display: inline-block;
+  position: relative;
+  left: 0.075em;
+}
+
 $max-width: em(250);
 
 $l: new-breakpoint(min-width 512px 12);
@@ -47,6 +56,9 @@ body {
   text-shadow: rgba(64, 64, 64, 0.90) 1px 1px 2px;
   font-size: 100%;
   margin-top: 2em;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   @include media($l) {
     font-size: 133%;

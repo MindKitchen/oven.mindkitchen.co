@@ -33,6 +33,7 @@ var paths = {
     "src/robots.txt",
     "src/favicon.ico",
     "src/img/**/*",
+    "src/fonts/**/*",
     "src/css-animation-demo/**/*",
   ],
   entrypoint: ["./src/js/app.js"],
